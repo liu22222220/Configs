@@ -1,0 +1,12 @@
+[submodule ".oh-my-zsh/custom/plugins/auto-ls"]
+	path = .oh-my-zsh/custom/plugins/auto-ls
+	url = https://github.com/desyncr/auto-ls.git
+[submodule ".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+	path = .oh-my-zsh/custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule ".oh-my-zsh/custom/plugins/zsh-tab-title"]
+	path = .oh-my-zsh/custom/plugins/zsh-tab-title
+	url = https://github.com/trystan2k/zsh-tab-title
+[submodule ".oh-my-zsh/custom/themes/powerlevel9k"]
+	path = .oh-my-zsh/custom/themes/powerlevel9k
+	url = https://github.com/bhilburn.powerlevel9k.git
