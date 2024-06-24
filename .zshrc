@@ -1,173 +1,24 @@
-# ---------------------- Custom -------------------------
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-### Support 256 colors
-export TERM="xterm-256color"
 
-### oh-my-zsh
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-POWERLEVEL9K_MODE='nerdfont-complete'
-ZSH=$HOME/.oh-my-zsh
-ZSH_THEME='powerlevel9k/powerlevel9k'
+plugins=(git zsh-autosuggestions auto-ls)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=174"
 
-plugins=(zsh-autosuggestions auto-ls zsh-tab-title virtualenv)
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=59"
 source $ZSH/oh-my-zsh.sh
+source $HOME/.oh-my-zsh/custom/plugins/zlong_alert/zlong_alert.zsh
 
-### alias
-alias wordcount='pbpaste | wc -w'
-alias idea="/Applications/IntelliJ\ IDEA\ CE.app/Contents/MacOS/idea"
 
 eval $(thefuck --alias)
 alias f='fuck'
 
-### virtualenv wrapper 
-export WORKON_HOME=$HOME/.venvs
-export PROJECT_HOME=$HOME/Codes
-VIRTUALENVWRAPPER_PYTHON=/opt/brew/bin/python3
-source /opt/brew/bin/virtualenvwrapper.sh
-
-fp() { old=`pwd`;new=$(dirname "$1");if [ "$new" != "." ]; then cd $new; fi;file=`pwd`/$(basename "$1");cd $old;echo $file; }
-
-### work related
-source $HOME/.zshrc_work
-
-# ----------------------- PowerLevel9k ----------------------------
-
-DARKMODE=0
-
-### Color theme
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-
-LEFT='('
-RIGHT=')'
-# LEFT_PROMPT
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=( os_icon time dir)
-POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
-POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
-POWERLEVEL9K_WHITESPACE_BETWEEN_LEFT_SEGMENTS=''
-
-POWERLEVEL9K_VIRTUALENV_BACKGROUND='none'
-POWERLEVEL9K_VIRTUALENV_FOREGROUND='darkred'
-
-# status
-# POWERLEVEL9K_STATUS_VERBOSE=false
-
-# os_icon custom
-if [[ "${DARKMODE}" == "1" ]]
-then
-    POWERLEVEL9K_OS_ICON_BACKGROUND='none'
-    POWERLEVEL9K_OS_ICON_FOREGROUND='mistyrose1'
-else
-    POWERLEVEL9K_OS_ICON_BACKGROUND='none'
-    POWERLEVEL9K_OS_ICON_FOREGROUND='darkred'
-fi
-
-
-# battery
-#POWERLEVEL9K_BATTERY_LOW_BACKGROUND='none'
-#POWERLEVEL9K_BATTERY_LOW_FOREGROUND='001'
-#POWERLEVEL9K_BATTERY_CHARGING_BACKGROUND='none'
-#POWERLEVEL9K_BATTERY_CHARGING_FOREGROUND='076'
-#POWERLEVEL9K_BATTERY_CHARGED_BACKGROUND='none'
-#POWERLEVEL9K_BATTERY_CHARGED_FOREGROUND='076'
-#POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND='none'
-#POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND='003'
-#POWERLEVEL9K_BATTERY_LOW_THRESHOLD=15
-#POWERLEVEL9K_BATTERY_VERBOSE=false
-#POWERLEVEL9K_BATTERY_STAGES=''
-
-# time
-# POWERLEVEL9K_TIME_FORMAT="[%D{%d.%m.%y %H:%M:%S}]"
-POWERLEVEL9K_TIME_ICON=''
-if [[ "${DARKMODE}" == "1" ]]
-then
-    POWERLEVEL9K_TIME_BACKGROUND='none'
-    POWERLEVEL9K_TIME_FOREGROUND='navajowhite1'
-else 
-    POWERLEVEL9K_TIME_BACKGROUND='none'
-    POWERLEVEL9K_TIME_FOREGROUND='orange4'
-fi
-
-# ram
-#POWERLEVEL9K_RAM_ICON=''
-#POWERLEVEL9K_RAM_BACKGROUND='none'
-#POWERLEVEL9K_RAM_FOREGROUND='006'
-
-# dir
-POWERLEVEL9K_SHORTEN_DELIMITER=''
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=7
-# POWERLEVEL9K_SHORTEN_STRATEGY='truncate_to_first_and_last'
-
-POWERLEVEL9K_ETC_ICON=''
-POWERLEVEL9K_FOLDER_ICON=''
-POWERLEVEL9K_HOME_ICON=''
-POWERLEVEL9K_HOME_SUB_ICON=''
-
-if [[ "${DARKMODE}" == "1" ]]
-then
-    POWERLEVEL9K_DIR_ETC_BACKGROUND='none'
-    POWERLEVEL9K_DIR_ETC_FOREGROUND='mistyrose1'
-    POWERLEVEL9K_DIR_HOME_BACKGROUND='none'
-    POWERLEVEL9K_DIR_HOME_FOREGROUND='mistyrose1'
-    POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='none'
-    POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='mistyrose1'
-    POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='none'
-    POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='mistyrose1'
-else
-    POWERLEVEL9K_DIR_ETC_BACKGROUND='none'
-    POWERLEVEL9K_DIR_ETC_FOREGROUND='darkred'
-    POWERLEVEL9K_DIR_HOME_BACKGROUND='none'
-    POWERLEVEL9K_DIR_HOME_FOREGROUND='darkred'
-    POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='none'
-    POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='darkred'
-    POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='none'
-    POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='darkred'
-fi
-
-
-# customization
-# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
-
-# RIGHT_PROMP
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv)
-POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
-POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=' '
-POWERLEVEL9K_WHITESPACE_BETWEEN_RIGHT_SEGMENTS=''
-
-ZSH_THEME_VIRTUALENV_PROMPT_SUFFIX=')'
-if [[ "${DARKMODE}" == "1" ]]
-then
-    POWERLEVEL9K_VIRTUALENV_BACKGROUND='none'
-    POWERLEVEL9K_VIRTUALENV_FOREGROUND='navajowhite1'
-else 
-    POWERLEVEL9K_VIRTUALENV_BACKGROUND='none'
-    POWERLEVEL9K_VIRTUALENV_FOREGROUND='orange4'
-fi
-
-# vcs
-POWERLEVEL9K_SHOW_CHANGESET=true
-POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
-
-if [[ "${DARKMODE}" == "1" ]]
-then
-    POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
-    POWERLEVEL9K_VCS_CLEAN_FOREGROUND='rosybrown'
-    POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='none'
-    POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='indianred'
-    POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='none'
-    POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='navajowhite1'
-else
-    POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
-    POWERLEVEL9K_VCS_CLEAN_FOREGROUND='rosybrown'
-    POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='none'
-    POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='indianred'
-    POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='none'
-    POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='orange4'
-fi
-
-#POWERLEVEL9K_VCS_GIT_HOOKS=(git-aheadbehind git-remotebranch git-tagname)
-POWERLEVEL9K_VCS_GIT_HOOKS=()
-
-
-
-
+function fp() { old=`pwd`;new=$(dirname "$1");if [ "$new" != "." ]; then cd $new; fi;file=`pwd`/$(basename "$1");cd $old;echo $file; }
